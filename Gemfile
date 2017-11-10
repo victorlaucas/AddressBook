@@ -52,3 +52,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.3'
 gem 'gritter', '~> 1.2'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'petergate', '~> 1.8'
+gem 'administrate', '~> 0.8.1'
