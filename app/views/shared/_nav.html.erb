@@ -1,4 +1,18 @@
-<%= link_to "Home", root_path %>
-<%= link_to "Contacts", contacts_path %>
-<%= admin_dash(current_user) %>
-<%= sign_in(current_user) %>
+<nav>
+  <div class="nav-wrapper blue-grey darken-4">
+    <a href="#!" class="brand-logo"><%= link_to(image_tag('bookly.png', size: '220x75', class: "responsive-img"), root_path) %></a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Contacts", contacts_path %></li>
+      <li><%= admin_dash(current_user) %></li>
+      <li><%= sign_in(current_user) %></li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Contacts", contacts_path %></li>
+      <li><%= admin_dash(current_user) %></li>
+      <li><%= sign_in(current_user) %></li>
+    </ul>
+  </div>
+</nav>
