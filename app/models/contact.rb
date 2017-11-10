@@ -1,5 +1,8 @@
 class Contact < ApplicationRecord
   validates_presence_of :name, :address, :email, :phone
+
+  belongs_to :user
+
   EMAIL_REGEX = /\A\S+@.+\.\S+\z/
 
   validates_format_of :email, with: EMAIL_REGEX 

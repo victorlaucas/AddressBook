@@ -7,4 +7,10 @@ module ApplicationHelper
       (link_to "Register", new_user_registration_path)
     end 
   end
+
+  def admin_dash user
+    if logged_in?(:admin)
+      (link_to "Admin Dashboard", admin_root_path)
+    end 
+  end
 end
