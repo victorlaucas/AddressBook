@@ -8,25 +8,25 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :contact_name %>
+    <%= form.text_field :name, id: :contact_name, placeholder: "John Doe" %>
   </div>
 
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_field :address, id: :contact_address %>
+    <%= form.text_field :address, id: :contact_address, placeholder: "1600 Pennsylvania Ave NW Washington, DC 20500" %>
   </div>
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :contact_email %>
+    <%= form.text_field :email, id: :contact_email, placeholder: "johndoe@example.com" %>
   </div>
 
   <div class="field">
     <%= form.label :phone %>
-    <%= form.text_field :phone, id: :contact_phone %>
+    <%= form.text_field :phone, id: :contact_phone, placeholder: "202-456-1111" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit", class: "waves-effect waves-light btn" %>
   </div>
 <% end %>

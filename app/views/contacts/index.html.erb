@@ -20,9 +20,9 @@
           <td><%= contact.address %></td>
           <td><%= contact.email %></td>
           <td><%= contact.phone %></td>
-          <td><%= link_to 'Show', contact %></td>
-          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-          <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '<i class="material-icons">pageview</i>'.html_safe, contact, class: 'index-icons' %></td>
+          <td><%= link_to '<i class="material-icons">edit</i>'.html_safe, edit_contact_path(contact), class: 'index-icons' %></td>
+          <td><%= link_to '<i class="material-icons">delete</i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'index-icons' %></td>
         </tr>
       <% end %>
     </tbody>
@@ -30,5 +30,5 @@
 
   <br>
 
-  <%= link_to 'New Contact', new_contact_path %>
+  <%= link_to 'New Contact', new_contact_path, class: "waves-effect waves-light btn" %>
 </div>
