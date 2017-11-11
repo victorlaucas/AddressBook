@@ -12,5 +12,6 @@ class Contact < ApplicationRecord
   validates_format_of :phone, with: PHONE_REGEX
 
   validates :phone, length: { is: 10 } 
+  
   scope :sort_by_name, -> { order('name ASC') }
 end
