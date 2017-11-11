@@ -1,6 +1,11 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  # before_action :authorize_user, only: [:update, :edit, :destroy]
+
+  def authorize_user
+    current_user.roles == 'admin'|| current_user.id == @contact.user_id ? true : false
+  end
 
   # GET /contacts
   # GET /contacts.json
@@ -26,7 +31,7 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
-
+    @contact.user_id = current_user.id
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
@@ -41,25 +46,33 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+    if authorize_user
+      respond_to do |format|
+        if @contact.update(contact_params)
+          format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+          format.json { render :show, status: :ok, location: @contact }
+        else
+          format.html { render :edit }
+          format.json { render json: @contact.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    else 
+      redirect_to contacts_path, notice: 'You are not authorized'
+    end 
   end
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    if authorize_user
+      @contact.destroy
+      respond_to do |format|
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else 
+      redirect_to contacts_path, notice: 'You are not authorized'
+    end 
   end
 
   private
