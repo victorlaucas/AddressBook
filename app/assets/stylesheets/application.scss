@@ -2,9 +2,10 @@
 @import "materialize";
 @import "materialize/extras/nouislider";
 @import "material_icons";
-
+/*Index page*/
 .index-icons {
   font-size: 1.5em;
+  color: #6C809A;
 }
 
 .index-icons:hover {
@@ -12,13 +13,15 @@
   color: black;
 }
 
+/*Buttons*/
 .btn-space {
   margin-top: 10px;
 }
 
+/*Home page*/
 .promo i {
     margin: 0 auto;
-    color: #ee6e73;
+    color: #403D39;
     font-size: 7rem;
     display: block;
 }
