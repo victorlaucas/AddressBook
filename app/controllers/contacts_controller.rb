@@ -1,11 +1,14 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  # before_action :authorize_user, only: [:update, :edit, :destroy]
 
-  def authorize_user
-    current_user.roles == 'admin'|| current_user.id == @contact.user_id ? true : false
-  end
+  before_action :authorize_user, only: [:update, :edit, :destroy]
+
+  access all: [:show, :index], user: [:edit, :update, :destroy, :new, :create], admin: :all
+
+
+
+
 
   # GET /contacts
   # GET /contacts.json
@@ -46,7 +49,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    if authorize_user
+    if @auth 
       respond_to do |format|
         if @contact.update(contact_params)
           format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
@@ -57,26 +60,32 @@ class ContactsController < ApplicationController
         end
       end
     else 
-      redirect_to contacts_path, notice: 'You are not authorized'
+      redirect_to contacts_path, notice: "You are not authorized"
     end 
   end
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
-  def destroy
-    if authorize_user
-      @contact.destroy
-      respond_to do |format|
-        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else 
-      redirect_to contacts_path, notice: 'You are not authorized'
+def destroy
+  if @auth
+    @contact.destroy
+    respond_to do |format|
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.json { head :no_content }
     end 
-  end
+  else 
+    redirect_to contacts_path, notice: "You are not authorized"
+  end 
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+     
+   def authorize_user
+    @auth = current_user.id == @contact.user_id || current_user.roles == [:admin, :user]
+   end
+
+
     def set_contact
       @contact = Contact.find(params[:id])
     end
