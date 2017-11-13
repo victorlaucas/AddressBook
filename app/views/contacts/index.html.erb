@@ -21,8 +21,10 @@
           <td><%= contact.email %></td>
           <td><%= contact.phone %></td>
           <td><%= link_to '<i class="material-icons">pageview</i>'.html_safe, contact, class: 'index-icons' %></td>
-          <td><%= link_to '<i class="material-icons">edit</i>'.html_safe, edit_contact_path(contact), class: 'index-icons' %></td>
-          <td><%= link_to '<i class="material-icons">delete</i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'index-icons' %></td>
+          <% if  %>  
+            <td><%= link_to '<i class="material-icons">edit</i>'.html_safe, edit_contact_path(contact), class: 'index-icons'%></td>
+          <% end %>
+            <td><%= link_to '<i class="material-icons">delete</i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'index-icons' %></td>
         </tr>
       <% end %>
     </tbody>

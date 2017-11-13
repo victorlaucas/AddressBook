@@ -7,9 +7,6 @@ class ContactsController < ApplicationController
   access all: [:show, :index], user: [:edit, :update, :destroy, :new, :create], admin: :all
 
 
-
-
-
   # GET /contacts
   # GET /contacts.json
   def index
@@ -66,24 +63,26 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
-def destroy
-  if @auth
-    @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
+  def destroy
+    if @auth
+      @contact.destroy
+      respond_to do |format|
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+        format.json { head :no_content }
+      end 
+    else 
+      redirect_to contacts_path, notice: "You are not authorized"
     end 
-  else 
-    redirect_to contacts_path, notice: "You are not authorized"
-  end 
-end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
-     
-   def authorize_user
-    @auth = current_user.id == @contact.user_id || current_user.roles == [:admin, :user]
-   end
+   
+    def authorize_user
+      @auth = current_user.id == @contact.user_id || current_user.roles == [:admin, :user]
+    end
 
 
     def set_contact
