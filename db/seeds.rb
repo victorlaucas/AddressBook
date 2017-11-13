@@ -27,16 +27,4 @@ puts "2 regular user created"
                 user_id: @user.id
   )
 end
-puts "40 contacts created" 
-
-# 30.times do |contact|
-#   Contact.create!(
-#     user_id: @user.id
-#     # name: Faker::StarWars.character,
-#     # address:Faker::Address.street_address,
-#     # email:Faker::Internet.email,
-#     # phone:Faker::PhoneNumber.phone_number
-#     name: "Joe", address: "123", email: "fake@test.com", phone: "1231231234"
-#   )
-#   puts "30 contacts created"
-# end 
+puts "40 contacts created"  
