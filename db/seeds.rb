@@ -19,7 +19,7 @@ end
 
 puts "2 regular user created"
 
-30.times do |contact|
+40.times do |contact|
   Contact.create!(name: Faker::RickAndMorty.unique.character, 
                 address: Faker::Address.street_address, 
                 email: Faker::Internet.email, 
@@ -27,7 +27,7 @@ puts "2 regular user created"
                 user_id: @user.id
   )
 end
-puts "30 contacts created" 
+puts "40 contacts created" 
 
 # 30.times do |contact|
 #   Contact.create!(
